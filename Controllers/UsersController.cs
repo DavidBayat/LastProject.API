@@ -28,11 +28,33 @@ namespace LastProject.API.Controllers
         }
 
         // GET: api/Users/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        [HttpGet("{googleId}")]
+        public  ActionResult<User> GetUser(string googleId)
         {
-            var user = await _context.User.FindAsync(id);
+            //var us = await _context.User.FindAsync(id);
+            // var user = _context.User.Where(user => user.GoogleId == googleId).Include(user => user.Recipes).First();
+            //var user = await _context.User.Where(u => u.GoogleId == googleId).Include(user => user.Recipes).FirstOrDefaultAsync();
+            
+            var user =  (_context.User
+                        .Where(u => u.GoogleId == googleId)
+                        .Select(u => new User
+                        {
+                            Name = u.Name,
+                            Email = u.Email,
+                            GoogleId = u.GoogleId,
 
+                            // add 2nd table
+                            Recipes = u.Recipes
+                                .Select(r => new Recipe
+                                {
+                                    idMeal = r.idMeal,
+                                    strMeal = r.strMeal,
+                                    strMealThumb = r.strMealThumb,
+                                    GoogleId = r.GoogleId,
+                                }).ToList()
+                        })).FirstOrDefault();
+
+            
             if (user == null)
             {
                 return NotFound();
@@ -43,10 +65,10 @@ namespace LastProject.API.Controllers
 
         // PUT: api/Users/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
+        [HttpPut("{googleId}")]
+        public async Task<IActionResult> PutUser(string googleId, User user)
         {
-            if (id != user.Id)
+            if (googleId != user.GoogleId)
             {
                 return BadRequest();
             }
@@ -59,7 +81,7 @@ namespace LastProject.API.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExists(id))
+                if (!UserExists(googleId))
                 {
                     return NotFound();
                 }
@@ -75,12 +97,19 @@ namespace LastProject.API.Controllers
         // POST: api/Users
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        public async Task<ActionResult<User>> PostUser(CreateUserDTO user)
         {
-            _context.User.Add(user);
+            var newUser = new User {
+                GoogleId = user.GoogleId,
+                Name = user.Name,
+                Email = user.Email
+            };
+
+
+            _context.User.Add(newUser);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUser", new { id = user.Id }, user);
+            return CreatedAtAction("GetUser", new { id = user.GoogleId }, user);
         }
 
         // DELETE: api/Users/5
@@ -99,9 +128,9 @@ namespace LastProject.API.Controllers
             return NoContent();
         }
 
-        private bool UserExists(int id)
+        private bool UserExists(string id)
         {
-            return _context.User.Any(e => e.Id == id);
+            return _context.User.Any(e => e.GoogleId == id);
         }
     }
 }
