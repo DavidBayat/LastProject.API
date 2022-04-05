@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/saltdev/dotnet6/LastProject/LastProject/LastProject.API/LastProject.API.csproj": {}
+    "/Users/saltdev/Dotnet6/LastProject/LastProject.API/LastProject.API.csproj": {}
   },
   "projects": {
-    "/Users/saltdev/dotnet6/LastProject/LastProject/LastProject.API/LastProject.API.csproj": {
+    "/Users/saltdev/Dotnet6/LastProject/LastProject.API/LastProject.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/saltdev/dotnet6/LastProject/LastProject/LastProject.API/LastProject.API.csproj",
+        "projectUniqueName": "/Users/saltdev/Dotnet6/LastProject/LastProject.API/LastProject.API.csproj",
         "projectName": "LastProject.API",
-        "projectPath": "/Users/saltdev/dotnet6/LastProject/LastProject/LastProject.API/LastProject.API.csproj",
+        "projectPath": "/Users/saltdev/Dotnet6/LastProject/LastProject.API/LastProject.API.csproj",
         "packagesPath": "/Users/saltdev/.nuget/packages/",
-        "outputPath": "/Users/saltdev/dotnet6/LastProject/LastProject/LastProject.API/obj/",
+        "outputPath": "/Users/saltdev/Dotnet6/LastProject/LastProject.API/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/saltdev/.nuget/NuGet/NuGet.Config"
@@ -79,7 +79,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.201/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.101/RuntimeIdentifierGraph.json"
         }
       }
     }

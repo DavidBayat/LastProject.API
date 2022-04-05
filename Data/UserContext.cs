@@ -13,4 +13,6 @@ using Microsoft.EntityFrameworkCore;
         }
 
         public DbSet<User> User { get; set; }
+
+        public DbSet<Recipe> Recipe { get; set; }
     }

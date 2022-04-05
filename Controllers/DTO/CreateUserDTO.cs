@@ -1,14 +1,11 @@
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-public class User
+public class CreateUserDTO
 {
-    [StringLength(500), Key]
+    [StringLength(500)]
     public string GoogleId {get; set;}
     [StringLength(30)]
     public string? Name { get; set; }
     [StringLength(50)]
     public string? Email {get; set;}
-    public List<Recipe>? Recipes { get; set; }
-    
 }
